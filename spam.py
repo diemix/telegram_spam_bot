@@ -1,5 +1,7 @@
 #Автор не несет отственности за ущерб или неудобства которые мог причинить бот.
+#The author is not liable for damage or inconvenience that the bot could cause.
 
+#Use this for fun. Not for revenge.
 import time
 import telebot
 from telebot import types
