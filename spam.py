@@ -15,7 +15,6 @@ token = input("Insert token.. ")
 
 def check_token(token):
     global bot;
-    token = "1227508170:AAE_V-_sSS4m6k4YGShgVLRb42sk2V73590"
     try:
         bot = telebot.TeleBot(token)
     except:
@@ -25,7 +24,6 @@ def check_token(token):
 def get_id(id):
     id = int(id)
     message_number = 0
-    #print("Received id ", message.chat.id, "        date & time: ", time.asctime())
     while True:
         for counter in range(21):
             send_message(id,message_number)
@@ -37,7 +35,6 @@ id = input("Insert chat id..")
 def send_message(id, message_number):
     try:
         time.sleep(0.3)
-
         text = ''.join([random.choice(string.ascii_letters + string.digits + string.punctuation + "/start" + "/help") for i in range(1000)])
         keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=False)
         button = types.KeyboardButton(text=text)
@@ -45,7 +42,6 @@ def send_message(id, message_number):
                      button, button, button)
         bot.send_message(id, text, reply_markup=keyboard)
         print("Message number",message_number," sent to ", str(id), "        date & time: ", time.asctime())
-        return 0
     except:
         print("Failed to spam ", str(id), "Retrying in 20 secs..        date & time: ", time.asctime())
         time.sleep(20)
