@@ -44,7 +44,6 @@ def spam(id):
         id = message.text
         id = int(id)
         message_number = 0
-        print("Received id ", message.chat.id, "        date & time: ", time.asctime())
         while True:
             for counter in range(21):
                 send_message(id,message_number)
