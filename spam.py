@@ -8,19 +8,6 @@ from telebot import types
 import random
 import string
 
-
-token = input("Insert token.. ")
-
-
-
-def check_token(token):
-    global bot;
-    try:
-        bot = telebot.TeleBot(token)
-    except:
-        token =input("Invalid token.. ")
-        check_token(token)
-
 def get_id(id):
     id = int(id)
     message_number = 0
@@ -30,8 +17,14 @@ def get_id(id):
             message_number+=1
         time.sleep(15)
 
-check_token(token)
-id = input("Insert chat id..")
+def check_token(token):
+    try:
+        bot = telebot.TeleBot(token)
+    except:
+        token =input("Invalid token.. ")
+        check_token(token)
+    return bot
+
 def send_message(id, message_number):
     try:
         time.sleep(0.3)
@@ -46,9 +39,7 @@ def send_message(id, message_number):
         print("Failed to spam ", str(id), "Retrying in 20 secs..        date & time: ", time.asctime())
         time.sleep(20)
 
-
-@bot.message_handler(content_types=['text'])
-def get_id(message):
+def spam(id):
     try:
         id = message.text
         id = int(id)
@@ -60,12 +51,14 @@ def get_id(message):
                 message_number+=1
             time.sleep(15)
     except:
-        bot.send_message(message.chat.id, "Invalid id..")
+        sleep(30)
+        spam(id)
 
+@bot.message_handlers(commands=['help'])
+def help(message):
+    bot.send_message(message.chat.id, "Telegram Bot. Id of this chat - " + message.chat.id)
 
-@bot.message_handler(commands=['start'])
-def start(message):
-    bot.send_message(message.chat.id,"Hello! Add this bot to a chat and send me it's id")
-    bot.send_message(message.chat.id, "ID of this chat is " + str(message.chat.id))
-
+token = input("Insert token.. ")
+bot = check_token(token)
+id = input("Insert chat id..")
 bot.polling()
